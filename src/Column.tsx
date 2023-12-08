@@ -7,6 +7,7 @@ import { useRef } from "react"
 import { useItemDrag } from "./utils/useItemDrag"
 import { throttle } from "throttle-debounce-ts"
 import { useDrop } from "react-dnd"
+import { isHidden } from "./utils/isHidden"
 
 type ColumnProps = {
   id: string
@@ -35,7 +36,7 @@ export const Column = ({ id, text }: ColumnProps) => {
   drag(drop(ref))
 
   return (
-    <ColumnContainer ref={ref}>
+    <ColumnContainer ref={ref} isHidden={isHidden(draggedItem, "COLUMN", id)}>
       <ColumnTitle>{text}</ColumnTitle>
       {tasks.map((task) => (
         <Card key={task.id} id={task.id} text={task.text} />
